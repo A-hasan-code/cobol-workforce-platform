@@ -81,10 +81,10 @@ export default function CompilerPage({ go }) {
   return (
     <div className="app-shell compiler-shell">
       <header className="chrome">
-        <div className="chrome-row">
-          <button type="button" className="brand-btn" onClick={() => go("/")} title="Back to Home">
-            <Wordmark />
-          </button>
+        <button type="button" className="brand-btn" onClick={() => go("/")} title="Back to Home">
+          <Wordmark />
+        </button>
+        <div className="chrome-right">
           <nav className="chrome-nav" aria-label="Site">
             <button type="button" className="ghost" onClick={() => go("/")}>
               Home

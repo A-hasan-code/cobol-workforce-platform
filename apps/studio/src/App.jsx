@@ -605,7 +605,7 @@ export default function App({ go }) {
               Test
             </button>
             <button type="button" disabled={busy} onClick={onDownloadHandoff} title="Download certified ZIP pack for bank developers">
-              Download COBOL pack
+              Download pack
             </button>
             <button type="button" className="ghost" disabled={busy} onClick={onResetLab} title="Clean sandbox and reset files">
               Reset lab

@@ -168,10 +168,10 @@ export default function ConverterPage({ go }) {
   return (
     <div className="app-shell converter-shell">
       <header className="chrome">
-        <div className="chrome-row">
-          <button type="button" className="brand-btn" onClick={() => go("/")} title="Back to Home">
-            <Wordmark />
-          </button>
+        <button type="button" className="brand-btn" onClick={() => go("/")} title="Back to Home">
+          <Wordmark />
+        </button>
+        <div className="chrome-right">
           <nav className="chrome-nav" aria-label="Site">
             <button type="button" className="ghost" onClick={() => go("/")}>
               Home
@@ -205,20 +205,26 @@ export default function ConverterPage({ go }) {
             {doctorState?.ok ? "Local · cobc ready" : "Local · cobc missing"}
           </span>
           <div className="toolbar" role="group" aria-label="Converter actions">
-            <button type="button" disabled={busy} onClick={() => setEasy(STARTER)}>
+            <button type="button" disabled={busy} onClick={() => setEasy(STARTER)} title="Load starter EasyLang">
               Starter
             </button>
-            <button type="button" className="primary" disabled={busy} onClick={onConvert}>
+            <button
+              type="button"
+              className={`primary ${busy ? "is-busy" : ""}`}
+              disabled={busy}
+              onClick={onConvert}
+              title="Transpile EasyLang to GnuCOBOL"
+            >
               Convert
             </button>
-            <button type="button" disabled={busy} onClick={onRun}>
+            <button type="button" disabled={busy} onClick={onRun} title="Convert then compile and run">
               Convert + Run
             </button>
-            <button type="button" disabled={busy} onClick={copyCobol}>
-              Copy COBOL
+            <button type="button" disabled={busy} onClick={copyCobol} title="Copy generated COBOL">
+              Copy
             </button>
-            <button type="button" disabled={busy} onClick={onDownload}>
-              Download COBOL pack
+            <button type="button" disabled={busy} onClick={onDownload} title="Download COBOL pack ZIP">
+              Download pack
             </button>
           </div>
         </div>
