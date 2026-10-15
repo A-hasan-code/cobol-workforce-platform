@@ -1,0 +1,40 @@
+---
+description: COBOL workforce platform vision, audiences, architecture, and build phases
+alwaysApply: true
+---
+
+# COBOL Workforce Platform
+
+## Vision
+Make every developer a COBOL-capable engineer — without rewriting bank COBOL systems.
+
+COBOL stays the runtime. We add a modern work layer: understand, navigate, change safely, prove, observe.
+
+## Who we benefit
+- **Banks** — readable estates, safe change, audit trail, lower risk (paying customer)
+- **IT services** — delivery partners who implement and sell with the tool
+- **Students / indie hackers** — fame, demos, learning, talent funnel
+- **Global developers** — familiar local→CI→staging→prod loop on COBOL
+
+Public face = Studio + Runtime Kit. Bank revolution = Pipeline + Control Plane + Sense.
+
+## Modules
+- **Studio** — editor, explain, generate, modern view
+- **Runtime Kit** — local/cloud GnuCOBOL run + tests + `cobol.toml`
+- **Pipeline** — CI/CD, gates, artifacts
+- **Control Plane** — envs, deploy, approvals, audit
+- **Sense** — health, slowdowns, blast radius, rollback signals
+
+## Architecture principles
+1. Modern developer workflow first; COBOL is dialect, not prison.
+2. Local-first: write → test → CI → staging → controlled prod.
+3. Fail soft: timeouts, safe retries, backpressure, graceful degradation, observability.
+4. Proof over vibes: impact analysis, tests, risk score, change reports.
+5. Target order: GnuCOBOL → IBM Enterprise COBOL → Micro Focus.
+6. No Day-1 promise of “any language → perfect COBOL.”
+7. Bank-scale data model early (programs, copybooks, dependencies).
+
+## Build phases (do not skip without user approval)
+1. Runtime Kit + tiny Studio (local run/test, explain, basic CI)
+2. Legacy intelligence (rules, impact, safe refactors, tests)
+3. Controlled code→COBOL + enterprise connectors

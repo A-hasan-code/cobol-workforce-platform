@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cobol-studio.local/schemas/estate.schema.json",
+  "title": "COBOL Estate",
+  "type": "object",
+  "required": ["version", "programs", "copybooks", "dependencies"],
+  "properties": {
+    "version": { "type": "string" },
+    "name": { "type": "string" },
+    "programs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Program" }
+    },
+    "copybooks": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Copybook" }
+    },
+    "dependencies": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Dependency" }
+    },
+    "jobs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Job" }
+    },
+    "datasets": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/DatasetRef" }
+    },
+    "ghosts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/GhostFlag" }
+    },
+    "rules": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/BusinessRule" }
+    },
+    "refactors": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/RefactorSuggestion" }
+    },
+    "environments": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Environment" }
+    }
+  },
+  "$defs": {
+    "Program": {
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "sourcePath": { "type": ["string", "null"] },
+        "loadPresent": { "type": "boolean" },
+        "status": {
+          "type": "string",
+          "enum": [
+            "documented",
+            "ghost",
+            "orphan-source",
+            "orphan-load",
+            "dynamic-uncertain",
+            "unused-candidate"
+          ]
+        },
+        "dialect": { "type": "string" }
+      }
+    },
+    "Copybook": {
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "path": { "type": "string" },
+        "fields": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name"],
+            "properties": {
+              "name": { "type": "string" },
+              "picture": { "type": "string" },
+              "level": { "type": "integer" }
+            }
+          }
+        }
+      }
+    },
+    "Dependency": {
+      "type": "object",
+      "required": ["from", "to", "type"],
+      "properties": {
+        "from": { "type": "string" },
+        "to": { "type": "string" },
+        "type": {
+          "type": "string",
+          "enum": ["COPY", "CALL", "EXEC", "DD", "SQL", "CICS"]
+        }
+      }
+    },
+    "Job": {
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "jclPath": { "type": ["string", "null"] },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "programId": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "DatasetRef": {
+      "type": "object",
+      "required": ["id", "ddname"],
+      "properties": {
+        "id": { "type": "string" },
+        "ddname": { "type": "string" },
+        "dsnPattern": { "type": "string" },
+        "producers": { "type": "array", "items": { "type": "string" } },
+        "consumers": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "GhostFlag": {
+      "type": "object",
+      "required": ["programId", "kind"],
+      "properties": {
+        "programId": { "type": "string" },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "ghost-load",
+            "orphan-source",
+            "orphan-load",
+            "undocumented-run",
+            "unused-candidate",
+            "dynamic-uncertain"
+          ]
+        },
+        "evidence": { "type": "string" }
+      }
+    },
+    "Environment": {
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": {
+          "type": "string",
+          "enum": ["local", "ci", "staging", "prod"]
+        },
+        "risk": { "type": "string" }
+      }
+    },
+    "BusinessRule": {
+      "type": "object",
+      "required": ["id", "programId", "kind", "summary"],
+      "properties": {
+        "id": { "type": "string" },
+        "programId": { "type": "string" },
+        "kind": {
+          "type": "string",
+          "enum": ["tagged", "if", "evaluate", "compute", "when", "condition-name"]
+        },
+        "summary": { "type": "string" },
+        "evidence": { "type": "string" },
+        "line": { "type": "integer" }
+      }
+    },
+    "RefactorSuggestion": {
+      "type": "object",
+      "required": ["id", "kind", "title", "safe"],
+      "properties": {
+        "id": { "type": "string" },
+        "severity": { "type": "string" },
+        "kind": { "type": "string" },
+        "target": { "type": "string" },
+        "title": { "type": "string" },
+        "rationale": { "type": "string" },
+        "safe": { "type": "boolean" },
+        "steps": { "type": "array", "items": { "type": "string" } },
+        "testStub": { "type": "string" }
+      }
+    }
+  }
+}

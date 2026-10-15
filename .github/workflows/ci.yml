@@ -1,0 +1,46 @@
+name: ci
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  runtime-kit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install GnuCOBOL
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gnucobol
+          cobc --version
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install npm deps
+        run: npm install
+
+      - name: Ingest estate + validate + Phase 2 check
+        run: |
+          npm run estate:ingest
+          npm run estate:validate
+          npm run estate:test
+          npm run phase2:check
+          npm run risk:gate
+
+      - name: Doctor
+        run: npm run doctor
+
+      - name: Compile + test sample
+        run: npm run test:sample
+
+      - name: Phase 1 check
+        run: npm run phase1:check
+
+      - name: Build Studio
+        run: npm run studio:build

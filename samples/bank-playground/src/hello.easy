@@ -1,0 +1,3 @@
+# Tiny EasyLang hello — Generate COBOL then Run.
+msg = "HELLO FROM EASY"
+print(msg)

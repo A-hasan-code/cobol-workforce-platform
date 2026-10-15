@@ -1,0 +1,14 @@
+{
+  "name": "@cobol/easylang",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.js",
+  "bin": {
+    "easylang": "./bin/easylang.js"
+  },
+  "scripts": {
+    "build": "node ./bin/easylang.js build",
+    "test": "node ./scripts/selftest.js"
+  }
+}

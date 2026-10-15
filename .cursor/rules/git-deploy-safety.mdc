@@ -1,0 +1,31 @@
+---
+description: Ask before deploy/push; never let Cursor identity appear on git
+alwaysApply: true
+---
+
+# Git & Deploy Safety
+
+## Deploy — always ask first
+Before any deploy, publish, release, hosting, cloud provision, or production-like runtime push:
+1. STOP and ask the user for explicit approval.
+2. Say what, where, and the risk.
+3. Proceed only after a clear yes in this conversation.
+
+## Git push — always ask first
+- NEVER `git push`, `git push -u`, force-push, or publish a remote without explicit user approval.
+- Create commits only when the user explicitly asks.
+- NEVER change git config (`user.name`, `user.email`, remotes) unless the user explicitly asks.
+- Follow the user’s committing-changes / creating-PRs rules when they request commit or PR.
+
+## Git identity — Cursor name must never appear
+Expected human identity (if already configured): `A-hasan-code` / `alihasan12soft786@gmail.com`.
+
+When the user approves commit/push:
+- Use the user’s Git identity only.
+- Do NOT set author/committer to Cursor, Copilot, or any AI/tool name.
+- Do NOT amend author fields to inject tool branding.
+- If `user.name` / `user.email` is missing or wrong: STOP and ask the user to fix identity — do not invent or override silently.
+
+## Secrets
+- Never commit `.env`, tokens, PATs, or credentials.
+- Never ask for passwords in chat; use `gh auth login` / device flow / local PAT.

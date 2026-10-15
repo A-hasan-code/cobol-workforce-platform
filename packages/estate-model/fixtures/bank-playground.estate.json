@@ -1,0 +1,896 @@
+{
+  "version": "0.2.0",
+  "name": "bank-playground",
+  "programs": [
+    {
+      "id": "prog:account",
+      "name": "ACCOUNT",
+      "sourcePath": "samples/bank-playground/src/account.cob",
+      "loadPresent": false,
+      "status": "orphan-source",
+      "dialect": "gnucobol-free"
+    },
+    {
+      "id": "prog:acctbal",
+      "name": "ACCTBAL",
+      "sourcePath": "samples/bank-playground/src/acctbal.cob",
+      "loadPresent": false,
+      "status": "orphan-source",
+      "dialect": "gnucobol-free"
+    },
+    {
+      "id": "prog:acctprint",
+      "name": "ACCTPRINT",
+      "sourcePath": "samples/bank-playground/src/acctprint.cob",
+      "loadPresent": false,
+      "status": "orphan-source",
+      "dialect": "gnucobol-free"
+    },
+    {
+      "id": "prog:adapters",
+      "name": "ADAPTERS",
+      "sourcePath": "samples/bank-playground/src/adapters.cob",
+      "loadPresent": false,
+      "status": "orphan-source",
+      "dialect": "gnucobol-free"
+    },
+    {
+      "id": "prog:add",
+      "name": "ADD",
+      "sourcePath": null,
+      "loadPresent": false,
+      "status": "documented",
+      "dialect": "unknown"
+    },
+    {
+      "id": "prog:batchctl",
+      "name": "BATCHCTL",
+      "sourcePath": "samples/bank-playground/src/batchctl.cob",
+      "loadPresent": true,
+      "status": "documented",
+      "dialect": "gnucobol-free"
+    },
+    {
+      "id": "prog:deadprog",
+      "name": "DEADPROG",
+      "sourcePath": "samples/bank-playground/src/deadprog.cob",
+      "loadPresent": false,
+      "status": "orphan-source",
+      "dialect": "gnucobol-free"
+    },
+    {
+      "id": "prog:double",
+      "name": "DOUBLE",
+      "sourcePath": null,
+      "loadPresent": false,
+      "status": "documented",
+      "dialect": "unknown"
+    },
+    {
+      "id": "prog:fileio",
+      "name": "FILEIO",
+      "sourcePath": "samples/bank-playground/src/fileio.cob",
+      "loadPresent": false,
+      "status": "orphan-source",
+      "dialect": "gnucobol-free"
+    },
+    {
+      "id": "prog:functions",
+      "name": "FUNCTIONS",
+      "sourcePath": "samples/bank-playground/src/functions.cob",
+      "loadPresent": false,
+      "status": "orphan-source",
+      "dialect": "gnucobol-free"
+    },
+    {
+      "id": "prog:greet",
+      "name": "GREET",
+      "sourcePath": null,
+      "loadPresent": false,
+      "status": "documented",
+      "dialect": "unknown"
+    },
+    {
+      "id": "prog:interest",
+      "name": "INTEREST",
+      "sourcePath": "samples/bank-playground/src/interest.cob",
+      "loadPresent": true,
+      "status": "documented",
+      "dialect": "gnucobol-free"
+    },
+    {
+      "id": "prog:oldutil",
+      "name": "OLDUTIL",
+      "sourcePath": null,
+      "loadPresent": true,
+      "status": "ghost",
+      "dialect": "unknown"
+    },
+    {
+      "id": "prog:ratecalc",
+      "name": "RATECALC",
+      "sourcePath": "samples/bank-playground/src/ratecalc.cob",
+      "loadPresent": true,
+      "status": "documented",
+      "dialect": "gnucobol-free"
+    },
+    {
+      "id": "prog:ws-dyn-name",
+      "name": "WS-DYN-NAME",
+      "sourcePath": null,
+      "loadPresent": false,
+      "status": "dynamic-uncertain",
+      "dialect": "unknown"
+    }
+  ],
+  "copybooks": [
+    {
+      "id": "cpy:acctrec",
+      "name": "acctrec.cpy",
+      "path": "samples/bank-playground/copybooks/acctrec.cpy",
+      "fields": [
+        {
+          "name": "ACCT-RECORD",
+          "level": 1,
+          "picture": ""
+        },
+        {
+          "name": "ACCT-ID",
+          "level": 5,
+          "picture": "X(8)."
+        },
+        {
+          "name": "ACCT-NAME",
+          "level": 5,
+          "picture": "X(20)."
+        },
+        {
+          "name": "ACCT-BAL-TEXT",
+          "level": 5,
+          "picture": "X(10)."
+        },
+        {
+          "name": "ACCT-RATE-TEXT",
+          "level": 5,
+          "picture": "X(6)."
+        }
+      ]
+    },
+    {
+      "id": "cpy:orphan",
+      "name": "orphan.cpy",
+      "path": "samples/bank-playground/copybooks/orphan.cpy",
+      "fields": [
+        {
+          "name": "ORPHAN-RECORD",
+          "level": 1,
+          "picture": ""
+        },
+        {
+          "name": "ORPHAN-CODE",
+          "level": 5,
+          "picture": "X(4)."
+        },
+        {
+          "name": "ORPHAN-NOTE",
+          "level": 5,
+          "picture": "X(40)."
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "from": "prog:acctbal",
+      "to": "cpy:acctrec",
+      "type": "COPY"
+    },
+    {
+      "from": "prog:acctprint",
+      "to": "cpy:acctrec",
+      "type": "COPY"
+    },
+    {
+      "from": "prog:adapters",
+      "to": "prog:interest",
+      "type": "CALL"
+    },
+    {
+      "from": "prog:batchctl",
+      "to": "prog:ratecalc",
+      "type": "CALL"
+    },
+    {
+      "from": "prog:batchctl",
+      "to": "prog:oldutil",
+      "type": "CALL"
+    },
+    {
+      "from": "prog:fileio",
+      "to": "prog:add",
+      "type": "CALL"
+    },
+    {
+      "from": "prog:fileio",
+      "to": "prog:double",
+      "type": "CALL"
+    },
+    {
+      "from": "prog:fileio",
+      "to": "ds:f-f",
+      "type": "DD"
+    },
+    {
+      "from": "prog:functions",
+      "to": "prog:greet",
+      "type": "CALL"
+    },
+    {
+      "from": "prog:functions",
+      "to": "prog:add",
+      "type": "CALL"
+    },
+    {
+      "from": "job:dailyint",
+      "to": "prog:interest",
+      "type": "EXEC"
+    },
+    {
+      "from": "job:dailyint",
+      "to": "ds:acctfile",
+      "type": "DD"
+    },
+    {
+      "from": "job:nightbat",
+      "to": "prog:batchctl",
+      "type": "EXEC"
+    },
+    {
+      "from": "job:nightbat",
+      "to": "prog:oldutil",
+      "type": "EXEC"
+    }
+  ],
+  "jobs": [
+    {
+      "id": "job:dailyint",
+      "name": "DAILYINT",
+      "jclPath": "samples/bank-playground/jcl/DAILYINT.jcl",
+      "steps": [
+        {
+          "name": "STEP01",
+          "programId": "prog:interest"
+        }
+      ]
+    },
+    {
+      "id": "job:nightbat",
+      "name": "NIGHTBAT",
+      "jclPath": "samples/bank-playground/jcl/NIGHTBAT.jcl",
+      "steps": [
+        {
+          "name": "CTL",
+          "programId": "prog:batchctl"
+        },
+        {
+          "name": "GHOST",
+          "programId": "prog:oldutil"
+        }
+      ]
+    }
+  ],
+  "datasets": [
+    {
+      "id": "ds:f-f",
+      "ddname": "F-F",
+      "dsnPattern": "easydemo.txt",
+      "producers": [],
+      "consumers": [
+        "prog:fileio"
+      ]
+    },
+    {
+      "id": "ds:acctfile",
+      "ddname": "ACCTFILE",
+      "dsnPattern": "PLAY.ACCT.IN",
+      "producers": [],
+      "consumers": []
+    }
+  ],
+  "ghosts": [
+    {
+      "programId": "prog:oldutil",
+      "kind": "ghost-load",
+      "evidence": "In loadlib but not in documented inventory"
+    },
+    {
+      "programId": "prog:account",
+      "kind": "orphan-source",
+      "evidence": "Source present; not in loadlib, JCL EXEC, or static CALL"
+    },
+    {
+      "programId": "prog:acctbal",
+      "kind": "orphan-source",
+      "evidence": "Source present; not in loadlib, JCL EXEC, or static CALL"
+    },
+    {
+      "programId": "prog:acctprint",
+      "kind": "orphan-source",
+      "evidence": "Source present; not in loadlib, JCL EXEC, or static CALL"
+    },
+    {
+      "programId": "prog:adapters",
+      "kind": "orphan-source",
+      "evidence": "Source present; not in loadlib, JCL EXEC, or static CALL"
+    },
+    {
+      "programId": "prog:deadprog",
+      "kind": "orphan-source",
+      "evidence": "Source present; not in loadlib, JCL EXEC, or static CALL"
+    },
+    {
+      "programId": "prog:fileio",
+      "kind": "orphan-source",
+      "evidence": "Source present; not in loadlib, JCL EXEC, or static CALL"
+    },
+    {
+      "programId": "prog:functions",
+      "kind": "orphan-source",
+      "evidence": "Source present; not in loadlib, JCL EXEC, or static CALL"
+    },
+    {
+      "programId": "prog:oldutil",
+      "kind": "orphan-load",
+      "evidence": "Load member with no source in estate"
+    },
+    {
+      "programId": "prog:oldutil",
+      "kind": "undocumented-run",
+      "evidence": "JCL EXEC PGM=OLDUTIL but not in documented inventory"
+    },
+    {
+      "programId": "prog:ws-dyn-name",
+      "kind": "dynamic-uncertain",
+      "evidence": "Dynamic CALL target identifier — resolve at runtime only"
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule:account:compute:1",
+      "programId": "prog:account",
+      "kind": "compute",
+      "summary": "Formula: WS-INTEREST ROUNDED = WS-ACCT-BALANCE * WS-ACCT-RATE / 100.",
+      "evidence": "COMPUTE WS-INTEREST ROUNDED = WS-ACCT-BALANCE * WS-ACCT-RATE / 100.",
+      "line": 25
+    },
+    {
+      "id": "rule:account:compute:2",
+      "programId": "prog:account",
+      "kind": "compute",
+      "summary": "Formula: WS-NEW-BAL ROUNDED = WS-ACCT-BALANCE + WS-INTEREST.",
+      "evidence": "COMPUTE WS-NEW-BAL ROUNDED = WS-ACCT-BALANCE + WS-INTEREST.",
+      "line": 26
+    },
+    {
+      "id": "rule:account:if:3",
+      "programId": "prog:account",
+      "kind": "if",
+      "summary": "Branch when NOT (WS-ACCT-ID = \"ACCT0001\")",
+      "evidence": "IF NOT (WS-ACCT-ID = \"ACCT0001\")",
+      "line": 36
+    },
+    {
+      "id": "rule:acctbal:compute:1",
+      "programId": "prog:acctbal",
+      "kind": "compute",
+      "summary": "Formula: WS-LEN = FUNCTION LENGTH(FUNCTION TRIM(ACCT-BAL-TEXT))",
+      "evidence": "COMPUTE WS-LEN = FUNCTION LENGTH(FUNCTION TRIM(ACCT-BAL-TEXT))",
+      "line": 14
+    },
+    {
+      "id": "rule:acctbal:if:2",
+      "programId": "prog:acctbal",
+      "kind": "if",
+      "summary": "Branch when WS-LEN = 0",
+      "evidence": "IF WS-LEN = 0",
+      "line": 15
+    },
+    {
+      "id": "rule:acctprint:tagged:1",
+      "programId": "prog:acctprint",
+      "kind": "tagged",
+      "summary": "Print layout must match ACCTREC copybook field order",
+      "evidence": "*> RULE: Print layout must match ACCTREC copybook field order",
+      "line": 15
+    },
+    {
+      "id": "rule:acctprint:if:2",
+      "programId": "prog:acctprint",
+      "kind": "if",
+      "summary": "Branch when ACCT-BAL-TEXT = SPACES",
+      "evidence": "IF ACCT-BAL-TEXT = SPACES",
+      "line": 16
+    },
+    {
+      "id": "rule:adapters:compute:1",
+      "programId": "prog:adapters",
+      "kind": "compute",
+      "summary": "Formula: WS-CARG1 ROUNDED = WS-ACCT-BALANCE.",
+      "evidence": "COMPUTE WS-CARG1 ROUNDED = WS-ACCT-BALANCE.",
+      "line": 28
+    },
+    {
+      "id": "rule:adapters:compute:2",
+      "programId": "prog:adapters",
+      "kind": "compute",
+      "summary": "Formula: WS-CARG2 ROUNDED = WS-ACCT-RATE.",
+      "evidence": "COMPUTE WS-CARG2 ROUNDED = WS-ACCT-RATE.",
+      "line": 29
+    },
+    {
+      "id": "rule:adapters:if:3",
+      "programId": "prog:adapters",
+      "kind": "if",
+      "summary": "Branch when NOT (WS-ACCT-ID = \"ACCT0001\")",
+      "evidence": "IF NOT (WS-ACCT-ID = \"ACCT0001\")",
+      "line": 37
+    },
+    {
+      "id": "rule:adapters:compute:4",
+      "programId": "prog:adapters",
+      "kind": "compute",
+      "summary": "Formula: LK-RET ROUNDED = LK-BAL * LK-RATE / 100.",
+      "evidence": "COMPUTE LK-RET ROUNDED = LK-BAL * LK-RATE / 100.",
+      "line": 50
+    },
+    {
+      "id": "rule:fileio:if:1",
+      "programId": "prog:fileio",
+      "kind": "if",
+      "summary": "Branch when WS-F-FS NOT = \"00\"",
+      "evidence": "IF WS-F-FS NOT = \"00\"",
+      "line": 33
+    },
+    {
+      "id": "rule:fileio:if:2",
+      "programId": "prog:fileio",
+      "kind": "if",
+      "summary": "Branch when WS-F-FS NOT = \"00\"",
+      "evidence": "IF WS-F-FS NOT = \"00\"",
+      "line": 39
+    },
+    {
+      "id": "rule:fileio:if:3",
+      "programId": "prog:fileio",
+      "kind": "if",
+      "summary": "Branch when WS-F-FS NOT = \"00\"",
+      "evidence": "IF WS-F-FS NOT = \"00\"",
+      "line": 44
+    },
+    {
+      "id": "rule:fileio:if:4",
+      "programId": "prog:fileio",
+      "kind": "if",
+      "summary": "Branch when WS-F-FS NOT = \"00\"",
+      "evidence": "IF WS-F-FS NOT = \"00\"",
+      "line": 50
+    },
+    {
+      "id": "rule:fileio:if:5",
+      "programId": "prog:fileio",
+      "kind": "if",
+      "summary": "Branch when WS-F-EOF NOT = \"Y\"",
+      "evidence": "IF WS-F-EOF NOT = \"Y\"",
+      "line": 59
+    },
+    {
+      "id": "rule:fileio:if:6",
+      "programId": "prog:fileio",
+      "kind": "if",
+      "summary": "Branch when WS-F-FS NOT = \"00\"",
+      "evidence": "IF WS-F-FS NOT = \"00\"",
+      "line": 60
+    },
+    {
+      "id": "rule:fileio:if:7",
+      "programId": "prog:fileio",
+      "kind": "if",
+      "summary": "Branch when WS-F-FS NOT = \"00\"",
+      "evidence": "IF WS-F-FS NOT = \"00\"",
+      "line": 66
+    },
+    {
+      "id": "rule:fileio:if:8",
+      "programId": "prog:fileio",
+      "kind": "if",
+      "summary": "Branch when NOT (WS-LINE = \"hello-from-fileio\")",
+      "evidence": "IF NOT (WS-LINE = \"hello-from-fileio\")",
+      "line": 71
+    },
+    {
+      "id": "rule:fileio:compute:9",
+      "programId": "prog:fileio",
+      "kind": "compute",
+      "summary": "Formula: LK-RET ROUNDED = LK-A + LK-B.",
+      "evidence": "COMPUTE LK-RET ROUNDED = LK-A + LK-B.",
+      "line": 93
+    },
+    {
+      "id": "rule:fileio:compute:10",
+      "programId": "prog:fileio",
+      "kind": "compute",
+      "summary": "Formula: LK-RET ROUNDED = LK-N * 2.",
+      "evidence": "COMPUTE LK-RET ROUNDED = LK-N * 2.",
+      "line": 104
+    },
+    {
+      "id": "rule:functions:compute:1",
+      "programId": "prog:functions",
+      "kind": "compute",
+      "summary": "Formula: WS-SCALED ROUNDED = WS-TOTAL * WS-FACTOR.",
+      "evidence": "COMPUTE WS-SCALED ROUNDED = WS-TOTAL * WS-FACTOR.",
+      "line": 26
+    },
+    {
+      "id": "rule:functions:compute:2",
+      "programId": "prog:functions",
+      "kind": "compute",
+      "summary": "Formula: LK-RET ROUNDED = LK-A + LK-B.",
+      "evidence": "COMPUTE LK-RET ROUNDED = LK-A + LK-B.",
+      "line": 41
+    },
+    {
+      "id": "rule:interest:compute:1",
+      "programId": "prog:interest",
+      "kind": "compute",
+      "summary": "Formula: WS-INTEREST ROUNDED = WS-BALANCE * WS-RATE / 100.",
+      "evidence": "COMPUTE WS-INTEREST ROUNDED = WS-BALANCE * WS-RATE / 100.",
+      "line": 23
+    },
+    {
+      "id": "rule:interest:compute:2",
+      "programId": "prog:interest",
+      "kind": "compute",
+      "summary": "Formula: WS-NEW-BAL ROUNDED = WS-BALANCE + WS-INTEREST.",
+      "evidence": "COMPUTE WS-NEW-BAL ROUNDED = WS-BALANCE + WS-INTEREST.",
+      "line": 24
+    },
+    {
+      "id": "rule:ratecalc:tagged:1",
+      "programId": "prog:ratecalc",
+      "kind": "tagged",
+      "summary": "Interest = balance * rate / 100; zero balance yields zero interest",
+      "evidence": "*> RULE: Interest = balance * rate / 100; zero balance yields zero interest",
+      "line": 2
+    },
+    {
+      "id": "rule:ratecalc:if:2",
+      "programId": "prog:ratecalc",
+      "kind": "if",
+      "summary": "Branch when LK-BALANCE = 0",
+      "evidence": "IF LK-BALANCE = 0",
+      "line": 13
+    },
+    {
+      "id": "rule:ratecalc:if:3",
+      "programId": "prog:ratecalc",
+      "kind": "if",
+      "summary": "Branch when LK-RATE > 100",
+      "evidence": "IF LK-RATE > 100",
+      "line": 17
+    },
+    {
+      "id": "rule:ratecalc:compute:4",
+      "programId": "prog:ratecalc",
+      "kind": "compute",
+      "summary": "Formula: LK-INTEREST ROUNDED = LK-BALANCE * LK-RATE / 100",
+      "evidence": "COMPUTE LK-INTEREST ROUNDED = LK-BALANCE * LK-RATE / 100",
+      "line": 20
+    }
+  ],
+  "refactors": [
+    {
+      "id": "ref:document:oldutil:ghost-load",
+      "severity": "medium",
+      "kind": "document-load",
+      "target": "prog:oldutil",
+      "title": "Document load/source for OLDUTIL (ghost-load)",
+      "rationale": "In loadlib but not in documented inventory",
+      "safe": true,
+      "steps": [
+        "Add PROGRAM-ID source or recover from loadlib export",
+        "Update inventory/documented.json",
+        "Re-run estate:ingest + ghosts"
+      ]
+    },
+    {
+      "id": "ref:archive:account",
+      "severity": "medium",
+      "kind": "archive-orphan-source",
+      "target": "prog:account",
+      "title": "Archive or document ACCOUNT",
+      "rationale": "Source present; not in loadlib, JCL EXEC, or static CALL",
+      "safe": true,
+      "steps": [
+        "Confirm with ops that the program is unused",
+        "Move to archive/ or mark status=unused-candidate in inventory",
+        "Keep a regression stub test so accidental revive is caught"
+      ],
+      "testStub": "*> Suggested test stub — orphan-source — expect not on daily path\nIDENTIFICATION DIVISION.\nPROGRAM-ID. TACCOUNT.\nPROCEDURE DIVISION.\n    DISPLAY \"SKIP ACCOUNT: orphan-source — expect not on daily path\"\n    STOP RUN.\n"
+    },
+    {
+      "id": "ref:archive:acctbal",
+      "severity": "medium",
+      "kind": "archive-orphan-source",
+      "target": "prog:acctbal",
+      "title": "Archive or document ACCTBAL",
+      "rationale": "Source present; not in loadlib, JCL EXEC, or static CALL",
+      "safe": true,
+      "steps": [
+        "Confirm with ops that the program is unused",
+        "Move to archive/ or mark status=unused-candidate in inventory",
+        "Keep a regression stub test so accidental revive is caught"
+      ],
+      "testStub": "*> Suggested test stub — orphan-source — expect not on daily path\nIDENTIFICATION DIVISION.\nPROGRAM-ID. TACCTBAL.\nPROCEDURE DIVISION.\n    DISPLAY \"SKIP ACCTBAL: orphan-source — expect not on daily path\"\n    STOP RUN.\n"
+    },
+    {
+      "id": "ref:archive:acctprint",
+      "severity": "medium",
+      "kind": "archive-orphan-source",
+      "target": "prog:acctprint",
+      "title": "Archive or document ACCTPRINT",
+      "rationale": "Source present; not in loadlib, JCL EXEC, or static CALL",
+      "safe": true,
+      "steps": [
+        "Confirm with ops that the program is unused",
+        "Move to archive/ or mark status=unused-candidate in inventory",
+        "Keep a regression stub test so accidental revive is caught"
+      ],
+      "testStub": "*> Suggested test stub — orphan-source — expect not on daily path\nIDENTIFICATION DIVISION.\nPROGRAM-ID. TACCTPRI.\nPROCEDURE DIVISION.\n    DISPLAY \"SKIP ACCTPRINT: orphan-source — expect not on daily path\"\n    STOP RUN.\n"
+    },
+    {
+      "id": "ref:archive:adapters",
+      "severity": "medium",
+      "kind": "archive-orphan-source",
+      "target": "prog:adapters",
+      "title": "Archive or document ADAPTERS",
+      "rationale": "Source present; not in loadlib, JCL EXEC, or static CALL",
+      "safe": true,
+      "steps": [
+        "Confirm with ops that the program is unused",
+        "Move to archive/ or mark status=unused-candidate in inventory",
+        "Keep a regression stub test so accidental revive is caught"
+      ],
+      "testStub": "*> Suggested test stub — orphan-source — expect not on daily path\nIDENTIFICATION DIVISION.\nPROGRAM-ID. TADAPTER.\nPROCEDURE DIVISION.\n    DISPLAY \"SKIP ADAPTERS: orphan-source — expect not on daily path\"\n    STOP RUN.\n"
+    },
+    {
+      "id": "ref:archive:deadprog",
+      "severity": "medium",
+      "kind": "archive-orphan-source",
+      "target": "prog:deadprog",
+      "title": "Archive or document DEADPROG",
+      "rationale": "Source present; not in loadlib, JCL EXEC, or static CALL",
+      "safe": true,
+      "steps": [
+        "Confirm with ops that the program is unused",
+        "Move to archive/ or mark status=unused-candidate in inventory",
+        "Keep a regression stub test so accidental revive is caught"
+      ],
+      "testStub": "*> Suggested test stub — orphan-source — expect not on daily path\nIDENTIFICATION DIVISION.\nPROGRAM-ID. TDEADPRO.\nPROCEDURE DIVISION.\n    DISPLAY \"SKIP DEADPROG: orphan-source — expect not on daily path\"\n    STOP RUN.\n"
+    },
+    {
+      "id": "ref:archive:fileio",
+      "severity": "medium",
+      "kind": "archive-orphan-source",
+      "target": "prog:fileio",
+      "title": "Archive or document FILEIO",
+      "rationale": "Source present; not in loadlib, JCL EXEC, or static CALL",
+      "safe": true,
+      "steps": [
+        "Confirm with ops that the program is unused",
+        "Move to archive/ or mark status=unused-candidate in inventory",
+        "Keep a regression stub test so accidental revive is caught"
+      ],
+      "testStub": "*> Suggested test stub — orphan-source — expect not on daily path\nIDENTIFICATION DIVISION.\nPROGRAM-ID. TFILEIO.\nPROCEDURE DIVISION.\n    DISPLAY \"SKIP FILEIO: orphan-source — expect not on daily path\"\n    STOP RUN.\n"
+    },
+    {
+      "id": "ref:archive:functions",
+      "severity": "medium",
+      "kind": "archive-orphan-source",
+      "target": "prog:functions",
+      "title": "Archive or document FUNCTIONS",
+      "rationale": "Source present; not in loadlib, JCL EXEC, or static CALL",
+      "safe": true,
+      "steps": [
+        "Confirm with ops that the program is unused",
+        "Move to archive/ or mark status=unused-candidate in inventory",
+        "Keep a regression stub test so accidental revive is caught"
+      ],
+      "testStub": "*> Suggested test stub — orphan-source — expect not on daily path\nIDENTIFICATION DIVISION.\nPROGRAM-ID. TFUNCTIO.\nPROCEDURE DIVISION.\n    DISPLAY \"SKIP FUNCTIONS: orphan-source — expect not on daily path\"\n    STOP RUN.\n"
+    },
+    {
+      "id": "ref:document:oldutil:orphan-load",
+      "severity": "medium",
+      "kind": "document-load",
+      "target": "prog:oldutil",
+      "title": "Document load/source for OLDUTIL (orphan-load)",
+      "rationale": "Load member with no source in estate",
+      "safe": true,
+      "steps": [
+        "Add PROGRAM-ID source or recover from loadlib export",
+        "Update inventory/documented.json",
+        "Re-run estate:ingest + ghosts"
+      ]
+    },
+    {
+      "id": "ref:document:oldutil:undocumented-run",
+      "severity": "high",
+      "kind": "document-load",
+      "target": "prog:oldutil",
+      "title": "Document load/source for OLDUTIL (undocumented-run)",
+      "rationale": "JCL EXEC PGM=OLDUTIL but not in documented inventory",
+      "safe": true,
+      "steps": [
+        "Add PROGRAM-ID source or recover from loadlib export",
+        "Update inventory/documented.json",
+        "Re-run estate:ingest + ghosts"
+      ]
+    },
+    {
+      "id": "ref:static-call:ws-dyn-name",
+      "severity": "high",
+      "kind": "prefer-static-call",
+      "target": "prog:ws-dyn-name",
+      "title": "Replace dynamic CALL targeting WS-DYN-NAME with a literal",
+      "rationale": "Dynamic CALL target identifier — resolve at runtime only",
+      "safe": true,
+      "steps": [
+        "Find CALL <identifier> sites",
+        "If the name is fixed at runtime, use CALL \"NAME\"",
+        "Re-ingest and confirm dynamic-uncertain ghost clears"
+      ],
+      "testStub": "*> Suggested: prove static CALL graph includes WS-DYN-NAME after refactor\nIDENTIFICATION DIVISION.\nPROGRAM-ID. TWSDYNNA.\nPROCEDURE DIVISION.\n    DISPLAY \"EXPECT STATIC CALL SITE FOR WS-DYN-NAME\"\n    STOP RUN.\n"
+    },
+    {
+      "id": "ref:test-formula:account",
+      "severity": "low",
+      "kind": "generate-formula-test",
+      "target": "prog:account",
+      "title": "Add formula regression test for ACCOUNT",
+      "rationale": "2 COMPUTE rule(s) — pin expected interest math.",
+      "safe": true,
+      "steps": [
+        "Save generated stub under tests/",
+        "Wire Runtime Kit test runner if not already",
+        "Assert DISPLAY / return values for known inputs"
+      ],
+      "testStub": "*> Suggested formula check for ACCOUNT\n*> Rule: Formula: WS-INTEREST ROUNDED = WS-ACCT-BALANCE * WS-ACCT-RATE / 100.\nIDENTIFICATION DIVISION.\nPROGRAM-ID. TACCOUNT.\nDATA DIVISION.\nWORKING-STORAGE SECTION.\n01  WS-OK PIC X VALUE \"Y\".\nPROCEDURE DIVISION.\n    DISPLAY \"TODO: call ACCOUNT with fixed inputs; assert result\"\n    DISPLAY \"RULE Formula: WS-INTEREST ROUNDED = WS-ACCT-BALANCE * WS-ACCT-RATE / 100.\"\n    IF WS-OK = \"Y\"\n       DISPLAY \"PASS\"\n    ELSE\n       DISPLAY \"FAIL\"\n       STOP RUN\n    END-IF\n    STOP RUN.\n"
+    },
+    {
+      "id": "ref:test-formula:acctbal",
+      "severity": "low",
+      "kind": "generate-formula-test",
+      "target": "prog:acctbal",
+      "title": "Add formula regression test for ACCTBAL",
+      "rationale": "1 COMPUTE rule(s) — pin expected interest math.",
+      "safe": true,
+      "steps": [
+        "Save generated stub under tests/",
+        "Wire Runtime Kit test runner if not already",
+        "Assert DISPLAY / return values for known inputs"
+      ],
+      "testStub": "*> Suggested formula check for ACCTBAL\n*> Rule: Formula: WS-LEN = FUNCTION LENGTH(FUNCTION TRIM(ACCT-BAL-TEXT))\nIDENTIFICATION DIVISION.\nPROGRAM-ID. TACCTBAL.\nDATA DIVISION.\nWORKING-STORAGE SECTION.\n01  WS-OK PIC X VALUE \"Y\".\nPROCEDURE DIVISION.\n    DISPLAY \"TODO: call ACCTBAL with fixed inputs; assert result\"\n    DISPLAY \"RULE Formula: WS-LEN = FUNCTION LENGTH(FUNCTION TRIM(ACCT-BAL-TEXT))\"\n    IF WS-OK = \"Y\"\n       DISPLAY \"PASS\"\n    ELSE\n       DISPLAY \"FAIL\"\n       STOP RUN\n    END-IF\n    STOP RUN.\n"
+    },
+    {
+      "id": "ref:test-formula:adapters",
+      "severity": "low",
+      "kind": "generate-formula-test",
+      "target": "prog:adapters",
+      "title": "Add formula regression test for ADAPTERS",
+      "rationale": "3 COMPUTE rule(s) — pin expected interest math.",
+      "safe": true,
+      "steps": [
+        "Save generated stub under tests/",
+        "Wire Runtime Kit test runner if not already",
+        "Assert DISPLAY / return values for known inputs"
+      ],
+      "testStub": "*> Suggested formula check for ADAPTERS\n*> Rule: Formula: WS-CARG1 ROUNDED = WS-ACCT-BALANCE.\nIDENTIFICATION DIVISION.\nPROGRAM-ID. TADAPTER.\nDATA DIVISION.\nWORKING-STORAGE SECTION.\n01  WS-OK PIC X VALUE \"Y\".\nPROCEDURE DIVISION.\n    DISPLAY \"TODO: call ADAPTERS with fixed inputs; assert result\"\n    DISPLAY \"RULE Formula: WS-CARG1 ROUNDED = WS-ACCT-BALANCE.\"\n    IF WS-OK = \"Y\"\n       DISPLAY \"PASS\"\n    ELSE\n       DISPLAY \"FAIL\"\n       STOP RUN\n    END-IF\n    STOP RUN.\n"
+    },
+    {
+      "id": "ref:test-formula:fileio",
+      "severity": "low",
+      "kind": "generate-formula-test",
+      "target": "prog:fileio",
+      "title": "Add formula regression test for FILEIO",
+      "rationale": "2 COMPUTE rule(s) — pin expected interest math.",
+      "safe": true,
+      "steps": [
+        "Save generated stub under tests/",
+        "Wire Runtime Kit test runner if not already",
+        "Assert DISPLAY / return values for known inputs"
+      ],
+      "testStub": "*> Suggested formula check for FILEIO\n*> Rule: Formula: LK-RET ROUNDED = LK-A + LK-B.\nIDENTIFICATION DIVISION.\nPROGRAM-ID. TFILEIO.\nDATA DIVISION.\nWORKING-STORAGE SECTION.\n01  WS-OK PIC X VALUE \"Y\".\nPROCEDURE DIVISION.\n    DISPLAY \"TODO: call FILEIO with fixed inputs; assert result\"\n    DISPLAY \"RULE Formula: LK-RET ROUNDED = LK-A + LK-B.\"\n    IF WS-OK = \"Y\"\n       DISPLAY \"PASS\"\n    ELSE\n       DISPLAY \"FAIL\"\n       STOP RUN\n    END-IF\n    STOP RUN.\n"
+    },
+    {
+      "id": "ref:test-formula:functions",
+      "severity": "low",
+      "kind": "generate-formula-test",
+      "target": "prog:functions",
+      "title": "Add formula regression test for FUNCTIONS",
+      "rationale": "2 COMPUTE rule(s) — pin expected interest math.",
+      "safe": true,
+      "steps": [
+        "Save generated stub under tests/",
+        "Wire Runtime Kit test runner if not already",
+        "Assert DISPLAY / return values for known inputs"
+      ],
+      "testStub": "*> Suggested formula check for FUNCTIONS\n*> Rule: Formula: WS-SCALED ROUNDED = WS-TOTAL * WS-FACTOR.\nIDENTIFICATION DIVISION.\nPROGRAM-ID. TFUNCTIO.\nDATA DIVISION.\nWORKING-STORAGE SECTION.\n01  WS-OK PIC X VALUE \"Y\".\nPROCEDURE DIVISION.\n    DISPLAY \"TODO: call FUNCTIONS with fixed inputs; assert result\"\n    DISPLAY \"RULE Formula: WS-SCALED ROUNDED = WS-TOTAL * WS-FACTOR.\"\n    IF WS-OK = \"Y\"\n       DISPLAY \"PASS\"\n    ELSE\n       DISPLAY \"FAIL\"\n       STOP RUN\n    END-IF\n    STOP RUN.\n"
+    },
+    {
+      "id": "ref:test-formula:interest",
+      "severity": "low",
+      "kind": "generate-formula-test",
+      "target": "prog:interest",
+      "title": "Add formula regression test for INTEREST",
+      "rationale": "2 COMPUTE rule(s) — pin expected interest math.",
+      "safe": true,
+      "steps": [
+        "Save generated stub under tests/",
+        "Wire Runtime Kit test runner if not already",
+        "Assert DISPLAY / return values for known inputs"
+      ],
+      "testStub": "*> Suggested formula check for INTEREST\n*> Rule: Formula: WS-INTEREST ROUNDED = WS-BALANCE * WS-RATE / 100.\nIDENTIFICATION DIVISION.\nPROGRAM-ID. TINTERES.\nDATA DIVISION.\nWORKING-STORAGE SECTION.\n01  WS-OK PIC X VALUE \"Y\".\nPROCEDURE DIVISION.\n    DISPLAY \"TODO: call INTEREST with fixed inputs; assert result\"\n    DISPLAY \"RULE Formula: WS-INTEREST ROUNDED = WS-BALANCE * WS-RATE / 100.\"\n    IF WS-OK = \"Y\"\n       DISPLAY \"PASS\"\n    ELSE\n       DISPLAY \"FAIL\"\n       STOP RUN\n    END-IF\n    STOP RUN.\n"
+    },
+    {
+      "id": "ref:test-formula:ratecalc",
+      "severity": "low",
+      "kind": "generate-formula-test",
+      "target": "prog:ratecalc",
+      "title": "Add formula regression test for RATECALC",
+      "rationale": "1 COMPUTE rule(s) — pin expected interest math.",
+      "safe": true,
+      "steps": [
+        "Save generated stub under tests/",
+        "Wire Runtime Kit test runner if not already",
+        "Assert DISPLAY / return values for known inputs"
+      ],
+      "testStub": "*> Suggested formula check for RATECALC\n*> Rule: Formula: LK-INTEREST ROUNDED = LK-BALANCE * LK-RATE / 100\nIDENTIFICATION DIVISION.\nPROGRAM-ID. TRATECAL.\nDATA DIVISION.\nWORKING-STORAGE SECTION.\n01  WS-OK PIC X VALUE \"Y\".\nPROCEDURE DIVISION.\n    DISPLAY \"TODO: call RATECALC with fixed inputs; assert result\"\n    DISPLAY \"RULE Formula: LK-INTEREST ROUNDED = LK-BALANCE * LK-RATE / 100\"\n    IF WS-OK = \"Y\"\n       DISPLAY \"PASS\"\n    ELSE\n       DISPLAY \"FAIL\"\n       STOP RUN\n    END-IF\n    STOP RUN.\n"
+    }
+  ],
+  "environments": [
+    {
+      "id": "env:local",
+      "name": "local",
+      "risk": "none"
+    },
+    {
+      "id": "env:ci",
+      "name": "ci",
+      "risk": "ephemeral"
+    },
+    {
+      "id": "env:staging",
+      "name": "staging",
+      "risk": "controlled"
+    },
+    {
+      "id": "env:prod",
+      "name": "prod",
+      "risk": "highest-gated"
+    }
+  ],
+  "ingestRun": {
+    "when": "2026-10-15T11:39:37.827Z",
+    "connector": "git-folder",
+    "scope": "samples/bank-playground",
+    "stats": {
+      "programs": 15,
+      "copybooks": 2,
+      "jobs": 2,
+      "dependencies": 14,
+      "ghosts": 11,
+      "rules": 29,
+      "refactors": 18
+    }
+  }
+}

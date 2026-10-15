@@ -1,0 +1,26 @@
+[project]
+name = "bank-playground"
+version = "0.1.0"
+description = "Local bank-shaped COBOL sample — safe sandbox, not real bank prod"
+
+[toolchain]
+dialect = "default"
+compiler = "gnucobol"
+source_format = "free"
+
+[paths]
+src = "src"
+copybooks = "copybooks"
+testdata = "testdata"
+expected = "expected"
+bin = "bin"
+
+[program]
+main = "interest.cob"
+executable = "interest"
+
+[[tests]]
+name = "interest-calc"
+command = "run"
+stdin = "testdata/accounts.in"
+expect_stdout = "expected/interest.out"

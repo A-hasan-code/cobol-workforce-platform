@@ -1,0 +1,20 @@
+# Render Blueprint — COBOL Studio (Docker: Node 20 + GnuCOBOL)
+# Deploy: Render Dashboard → New → Blueprint → connect this repo
+# Or: ask owner for explicit yes, then use Render CLI / dashboard.
+#
+# Safety: do not auto-deploy from agents; human must approve (docs/SAFETY.md).
+
+services:
+  - type: web
+    name: cobol-studio
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: "0.0.0.0"
+      # PORT is set by Render automatically; Studio reads process.env.PORT

@@ -1,0 +1,22 @@
+node_modules
+**/node_modules
+**/dist
+.git
+.github
+.cursor
+agent-transcripts
+**/.vite
+**/*.log
+.env
+.env.*
+!.env.example
+# Windows portable GnuCOBOL — Linux image uses apt gnucobol instead
+tools/gnucobol
+tools/7za
+tools/7za.zip
+coverage
+tmp
+.cache
+samples/**/bin
+Dockerfile
+.dockerignore

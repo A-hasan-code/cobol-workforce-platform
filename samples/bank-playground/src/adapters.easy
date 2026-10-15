@@ -1,0 +1,23 @@
+# EasyLang v5 — typed def + local stub adapters (NOT real Db2/HTTP)
+
+def interest(bal: num, rate: num) -> num:
+    return bal * rate / 100
+
+record Account:
+    id: str
+    name: str
+    balance: num
+    rate: num
+
+acct = Account()
+stub_load(acct, "ACCT0001")
+
+# Or field-by-field:
+# bal = stub_sql("balance", "ACCT0001")
+# rate = stub_http("/rates/default")
+
+earned = interest(acct.balance, acct.rate)
+print("NAME=", acct.name)
+print("BALANCE=", acct.balance)
+print("INTEREST=", earned)
+assert acct.id = "ACCT0001"

@@ -1,0 +1,22 @@
+*> Uses shared copybook — estate impact demo for ACCT-BAL-TEXT.
+IDENTIFICATION DIVISION.
+PROGRAM-ID. ACCTPRINT.
+
+DATA DIVISION.
+WORKING-STORAGE SECTION.
+    COPY ACCTREC.
+
+PROCEDURE DIVISION.
+MAIN.
+    MOVE "ACCT0001" TO ACCT-ID
+    MOVE "Ali Hasan" TO ACCT-NAME
+    MOVE "1250.00" TO ACCT-BAL-TEXT
+    MOVE "5.00" TO ACCT-RATE-TEXT
+    *> RULE: Print layout must match ACCTREC copybook field order
+    IF ACCT-BAL-TEXT = SPACES
+       DISPLAY "ASSERT FAIL: balance text empty"
+       STOP RUN
+    END-IF
+    DISPLAY "ID=" ACCT-ID
+    DISPLAY "BAL=" ACCT-BAL-TEXT
+    STOP RUN.

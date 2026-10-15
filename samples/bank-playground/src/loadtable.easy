@@ -1,0 +1,9 @@
+# v3+ — load_table + try/raise (plan rung)
+rows = load_table("rates.csv")
+print(rows[0])
+print(rows[1])
+
+try:
+    raise "demo-raise"
+except:
+    print("caught")

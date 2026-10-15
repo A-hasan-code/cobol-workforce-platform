@@ -1,0 +1,20 @@
+{
+  "name": "@cobol/estate-ingest",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.js",
+  "bin": {
+    "estate-ingest": "./bin/estate-ingest.js"
+  },
+  "scripts": {
+    "ingest": "node ./bin/estate-ingest.js ingest",
+    "ghosts": "node ./bin/estate-ingest.js ghosts",
+    "impact": "node ./bin/estate-ingest.js impact",
+    "rules": "node ./bin/estate-ingest.js rules",
+    "refactor": "node ./bin/estate-ingest.js refactor",
+    "risk-gate": "node ./bin/estate-ingest.js risk-gate",
+    "zip": "node ./bin/estate-ingest.js zip",
+    "test": "node ./scripts/selftest.js"
+  }
+}

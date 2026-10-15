@@ -1,0 +1,25 @@
+# EasyLang v4 — bank-shaped record (group item)
+# Maps to 01 WS-ACCT. / 05 fields — like a tiny copybook in one file.
+
+record Account:
+    id: str
+    name: str
+    balance: num
+    rate: num
+
+acct = Account()
+acct.id = "ACCT0001"
+acct.name = "Ali Hasan"
+acct.balance = 1250.00
+acct.rate = 5.00
+
+interest = acct.balance * acct.rate / 100
+new_bal = acct.balance + interest
+
+print("ACCOUNT=", acct.id)
+print("NAME=", acct.name)
+print("BALANCE=", acct.balance)
+print("INTEREST=", interest)
+print("NEW_BAL=", new_bal)
+
+assert acct.id = "ACCT0001"

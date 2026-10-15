@@ -1,0 +1,9 @@
+{
+  "acks": [
+    {
+      "field": "ACCT-BAL-TEXT",
+      "reason": "Sample playground — baseline impact known; CI ack for bank-playground fixture",
+      "when": "2026-10-15"
+    }
+  ]
+}

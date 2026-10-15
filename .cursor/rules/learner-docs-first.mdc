@@ -1,0 +1,34 @@
+---
+description: Studio Docs is the learner guide — always update it when shipping EasyLang or teachable features
+alwaysApply: true
+---
+
+# Learner Docs First
+
+Studio **Docs** (`apps/studio/src/docsContent.js`) is the product guide for learners — not an afterthought.
+
+## Hard rule
+When you ship **any** teachable EasyLang rung, Studio behavior, or sample that learners should try:
+
+1. **Update Docs in the same change** — do not leave “docs later.”
+2. Prefer **one idea per step** (callout + short text + one Try/Run box).
+3. Keep the **nav path** honest (Welcome → Easy Mode → topic pages → Practice).
+4. Mirror the ladder in `docs/EASY-MODE.md` + ROADMAP checkboxes when a rung ships.
+5. Point Playground samples (`*.easy`) from the Docs page that teaches them.
+
+## What “done” means for a ladder rung
+- [ ] `docsContent.js` — dedicated page and/or steps with live Run boxes  
+- [ ] Stale “coming next” / “vN later” callouts removed or moved forward  
+- [ ] FAQ + Quick guide cheat lines updated if syntax is new  
+- [ ] `docs/EASY-MODE.md` table for that version  
+- [ ] Sample `.easy` in `samples/bank-playground/src/` when useful  
+- [ ] Selftest proves the feature  
+
+## Style
+- Short words; English OK; Hinglish OK in chat, Docs stay clear learner English.
+- Separate steps beat one giant dump (see Functions / Files pages).
+- After Run, remind **Show COBOL** so mapping stays visible.
+
+## Do not
+- Ship EasyLang syntax only in code/tests without Docs.
+- Leave Docs saying a shipped feature is “next.”

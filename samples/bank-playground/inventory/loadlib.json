@@ -1,0 +1,4 @@
+{
+  "description": "Planted load library member list (L set) — Phase 2 fixture, not a real loadlib",
+  "members": ["INTEREST", "RATECALC", "BATCHCTL", "OLDUTIL"]
+}

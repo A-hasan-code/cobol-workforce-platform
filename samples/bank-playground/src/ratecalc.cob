@@ -1,0 +1,21 @@
+*> Documented subprogram — static CALL target from BATCHCTL.
+*> RULE: Interest = balance * rate / 100; zero balance yields zero interest
+IDENTIFICATION DIVISION.
+PROGRAM-ID. RATECALC.
+
+DATA DIVISION.
+LINKAGE SECTION.
+01  LK-BALANCE             PIC 9(7)V99.
+01  LK-RATE                PIC 9(3)V99.
+01  LK-INTEREST            PIC 9(7)V99.
+
+PROCEDURE DIVISION USING LK-BALANCE LK-RATE LK-INTEREST.
+    IF LK-BALANCE = 0
+       MOVE 0 TO LK-INTEREST
+       GOBACK
+    END-IF
+    IF LK-RATE > 100
+       MOVE 100 TO LK-RATE
+    END-IF
+    COMPUTE LK-INTEREST ROUNDED = LK-BALANCE * LK-RATE / 100
+    GOBACK.

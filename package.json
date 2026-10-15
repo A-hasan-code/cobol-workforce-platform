@@ -1,0 +1,37 @@
+{
+  "name": "cobol-workforce-platform",
+  "private": true,
+  "version": "0.1.0",
+  "description": "COBOL workforce platform — Runtime Kit + Studio playground",
+  "workspaces": [
+    "packages/runtime-kit",
+    "packages/estate-model",
+    "packages/estate-ingest",
+    "packages/easylang",
+    "apps/studio"
+  ],
+  "scripts": {
+    "doctor": "npm run doctor -w @cobol/runtime-kit",
+    "compile": "npm run compile -w @cobol/runtime-kit",
+    "run:sample": "npm run run:sample -w @cobol/runtime-kit",
+    "test:sample": "npm run test:sample -w @cobol/runtime-kit",
+    "easy:build": "npm run build -w @cobol/easylang --",
+    "easy:test": "npm run test -w @cobol/easylang",
+    "estate:ingest": "npm run ingest -w @cobol/estate-ingest",
+    "estate:ghosts": "npm run ghosts -w @cobol/estate-ingest",
+    "estate:rules": "npm run rules -w @cobol/estate-ingest",
+    "estate:refactor": "npm run refactor -w @cobol/estate-ingest",
+    "estate:validate": "npm run validate -w @cobol/estate-model",
+    "estate:test": "npm run test -w @cobol/estate-ingest",
+    "risk:gate": "node ./scripts/risk-gate.mjs",
+    "studio": "npm run dev -w @cobol/studio",
+    "studio:build": "npm run build -w @cobol/studio",
+    "studio:start": "npm run start -w @cobol/studio",
+    "phase1:check": "node ./scripts/phase1-check.mjs",
+    "phase2:check": "node ./scripts/phase2-check.mjs",
+    "ci": "npm run easy:test && npm run estate:ingest && npm run estate:validate && npm run estate:test && npm run phase2:check && npm run risk:gate && npm run doctor -w @cobol/runtime-kit && npm run test:sample -w @cobol/runtime-kit && npm run studio:build"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

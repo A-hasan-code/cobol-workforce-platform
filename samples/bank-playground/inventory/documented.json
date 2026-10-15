@@ -1,0 +1,4 @@
+{
+  "description": "Official inventory (Doc set) — what the wiki claims exists",
+  "programs": ["INTEREST", "RATECALC", "BATCHCTL"]
+}

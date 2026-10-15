@@ -1,0 +1,15 @@
+# EasyLang — same numbers as the bank playground sample.
+# File I/O lands on ladder v3; for now values are explicit (Python-easy).
+# Generate: node ./packages/easylang/bin/easylang.js build samples/bank-playground/src/interest.easy
+
+account = "ACCT0001"
+name = "Ali Hasan"
+balance = 1250.00
+rate = 5.00
+interest = balance * rate / 100
+new_bal = balance + interest
+print("ACCOUNT=", account)
+print("NAME=", name)
+print("BALANCE=", balance)
+print("INTEREST=", interest)
+print("NEW_BAL=", new_bal)

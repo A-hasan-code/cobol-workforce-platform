@@ -1,0 +1,20 @@
+{
+  "name": "@cobol/runtime-kit",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./src/index.js": "./src/index.js"
+  },
+  "bin": {
+    "cobol-kit": "./bin/cobol-kit.js"
+  },
+  "scripts": {
+    "doctor": "node ./bin/cobol-kit.js doctor",
+    "compile": "node ./bin/cobol-kit.js compile",
+    "run:sample": "node ./bin/cobol-kit.js run",
+    "test:sample": "node ./bin/cobol-kit.js test"
+  }
+}

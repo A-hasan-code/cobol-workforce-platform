@@ -1,0 +1,18 @@
+# EasyLang v3 — line-sequential file + assert + import
+
+import mathlib
+
+f = open("easydemo.txt", "w")
+write(f, "hello-from-fileio")
+close(f)
+
+f = open("easydemo.txt", "r")
+line = read(f)
+close(f)
+
+print(line)
+assert line = "hello-from-fileio"
+
+total = add(20, 22)
+print("add=", total)
+print("double=", double(total))
