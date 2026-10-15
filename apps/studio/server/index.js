@@ -46,6 +46,11 @@ app.get("/api/health", (_req, res) => {
   res.json({ ok: true, service: "cobol-studio" });
 });
 
+/** Lightweight keep-alive for free hosts (Render sleep). External cron should hit this. */
+app.get("/api/ping", (_req, res) => {
+  res.status(200).type("text/plain").send("pong");
+});
+
 app.get("/api/doctor", (_req, res) => {
   res.json(doctor());
 });

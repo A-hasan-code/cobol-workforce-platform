@@ -27,6 +27,7 @@
     "studio": "npm run dev -w @cobol/studio",
     "studio:build": "npm run build -w @cobol/studio",
     "studio:start": "npm run start -w @cobol/studio",
+    "keepalive": "node ./scripts/keep-alive.mjs",
     "phase1:check": "node ./scripts/phase1-check.mjs",
     "phase2:check": "node ./scripts/phase2-check.mjs",
     "ci": "npm run easy:test && npm run estate:ingest && npm run estate:validate && npm run estate:test && npm run phase2:check && npm run risk:gate && npm run doctor -w @cobol/runtime-kit && npm run test:sample -w @cobol/runtime-kit && npm run studio:build"

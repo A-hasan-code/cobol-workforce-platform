@@ -16,6 +16,31 @@ Sample data is **fake** (`samples/bank-playground`). This is not a bank producti
 
 Free web services may **spin down** when idle; first request after sleep can be slow.
 
+## Keep awake (anti-sleep ping)
+
+The process **cannot** wake itself after sleep — something **outside** must hit the app.
+
+| Endpoint | Response |
+|----------|----------|
+| `GET /api/ping` | `200` plain text `pong` (lightest) |
+| `GET /api/health` | JSON health (also fine for monitors) |
+
+### GitHub Actions (recommended)
+
+1. After Render gives you a URL, add secret **`STUDIO_URL`**  
+   (repo → Settings → Secrets and variables → Actions):  
+   `https://your-service.onrender.com` (no trailing slash)
+2. Workflow [`.github/workflows/keep-alive.yml`](../.github/workflows/keep-alive.yml) runs about every **10 minutes** and calls `/api/ping`.
+3. Trigger once manually: Actions → **keep-alive** → Run workflow.
+
+### Local / always-on machine
+
+```bash
+npm run keepalive -- https://your-service.onrender.com
+```
+
+**Trade-off:** keep-alive uses free instance hours; GitHub cron can drift. Paid Render (no spin-down) is the reliable fix.
+
 ## Prerequisites
 
 1. Repo on GitHub (or GitLab) connected to Render  
@@ -76,7 +101,8 @@ Open http://localhost:8787 — Doctor / Compile / Run / Test.
 | Doctor: cobc missing | Image must build from this `Dockerfile` (not bare Node runtime) |
 | Blank UI | Confirm build step ran `studio:build` and `dist/` exists |
 | Port errors | Do not hardcode PORT; use Render’s `PORT` |
-| Cold start timeout | Wait and retry; or upgrade plan to avoid spin-down |
+| Cold start / sleeps again | Set `STUDIO_URL` secret + enable keep-alive workflow; or upgrade plan |
+| Cold start timeout | Wait and retry; confirm `/api/ping` returns `pong` |
 
 ## Safety
 

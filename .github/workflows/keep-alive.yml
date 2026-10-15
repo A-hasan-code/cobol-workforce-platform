@@ -1,0 +1,38 @@
+# Hit /api/ping so Render free tier does not spin down from idle.
+# Setup: GitHub → Settings → Secrets → Actions → STUDIO_URL
+#   e.g. https://cobol-studio-xxxx.onrender.com  (no trailing slash)
+#
+# Honesty: burns free-instance hours; cron can drift on GitHub Free.
+
+name: keep-alive
+
+on:
+  schedule:
+    # ~every 10 minutes (Render free often sleeps after ~15m idle)
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require STUDIO_URL
+        env:
+          STUDIO_URL: ${{ secrets.STUDIO_URL }}
+        run: |
+          if [ -z "$STUDIO_URL" ]; then
+            echo "Skip: set repository secret STUDIO_URL to your Render base URL."
+            exit 0
+          fi
+
+      - name: Ping /api/ping
+        env:
+          STUDIO_URL: ${{ secrets.STUDIO_URL }}
+        run: |
+          if [ -z "$STUDIO_URL" ]; then
+            exit 0
+          fi
+          url="${STUDIO_URL%/}/api/ping"
+          echo "GET $url"
+          curl -fsS --max-time 60 "$url"
+          echo
