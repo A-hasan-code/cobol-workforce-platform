@@ -17,7 +17,9 @@ samples/**/*.c
 !samples/**/*.cbl
 !samples/**/*.cpy
 # Docs try scratch (must stay ignored after !*.cob)
+# Linux GnuCOBOL rejects leading _; use trytmp.cob (keep _try for old local files)
 samples/**/src/_try.cob
+samples/**/src/trytmp.cob
 .DS_Store
 Thumbs.db
 coverage/

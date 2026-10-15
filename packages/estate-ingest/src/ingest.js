@@ -32,8 +32,15 @@ function walkFiles(dir, exts, out = []) {
       if (name === "bin" || name === "node_modules") continue;
       walkFiles(abs, exts, out);
     } else if (exts.has(path.extname(name).toLowerCase())) {
-      // Skip Studio scratch (_try.cob) and editor temps
-      if (name.startsWith("_") || name.endsWith("~")) continue;
+      // Skip Studio scratch (trytmp.cob / legacy _try.cob) and editor temps
+      if (
+        name.startsWith("_") ||
+        name === "trytmp.cob" ||
+        name.startsWith("trytmp.") ||
+        name.endsWith("~")
+      ) {
+        continue;
+      }
       out.push(abs);
     }
   }

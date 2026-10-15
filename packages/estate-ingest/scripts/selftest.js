@@ -27,8 +27,12 @@ assert.ok(
 assert.ok(estate.dependencies.some((d) => d.type === "CALL"));
 assert.ok(estate.dependencies.some((d) => d.type === "EXEC"));
 assert.ok(
-  !estate.programs.some((p) => p.name === "CONVERT" && p.sourcePath?.includes("_try")),
-  "scratch _try.cob must not pollute estate"
+  !estate.programs.some(
+    (p) =>
+      /[/\\]_try\.cob$/.test(p.sourcePath || "") ||
+      /[/\\]trytmp\.cob$/.test(p.sourcePath || ""),
+  ),
+  "scratch trytmp.cob must not pollute estate"
 );
 
 const kinds = new Set(estate.ghosts.map((g) => g.kind));

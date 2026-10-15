@@ -7,8 +7,12 @@ import path from "node:path";
 export function resetLabSandbox(sampleDir) {
   const removed = [];
   const candidates = [
-    path.join(sampleDir, "src", "_try.cob"),
+    path.join(sampleDir, "src", "trytmp.cob"),
+    path.join(sampleDir, "src", "_try.cob"), // legacy name (Linux cobc forbids leading _)
     path.join(sampleDir, "easydemo.txt"),
+    path.join(sampleDir, "bin", "trytmp"),
+    path.join(sampleDir, "bin", "trytmp.exe"),
+    path.join(sampleDir, "bin", "trytmp.so"),
     path.join(sampleDir, "bin", "_try"),
     path.join(sampleDir, "bin", "_try.exe"),
     path.join(sampleDir, "bin", "_try.so"),
@@ -25,11 +29,16 @@ export function resetLabSandbox(sampleDir) {
     }
   }
 
-  // old selftest scratch modules
+  // old selftest / try scratch modules
   const srcDir = path.join(sampleDir, "src");
   if (fs.existsSync(srcDir)) {
     for (const name of fs.readdirSync(srcDir)) {
-      if (name.startsWith("_selftest_") || name.startsWith("_try")) {
+      if (
+        name.startsWith("_selftest_") ||
+        name.startsWith("_try") ||
+        name === "trytmp.cob" ||
+        name.startsWith("trytmp.")
+      ) {
         const p = path.join(srcDir, name);
         try {
           fs.unlinkSync(p);

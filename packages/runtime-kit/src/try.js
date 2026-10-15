@@ -4,9 +4,12 @@ import { spawnSync } from "node:child_process";
 import { findCobc, gnuCobolEnv } from "./doctor.js";
 import { parseCobcErrors } from "./parseErrors.js";
 
+/** Scratch basename — Linux GnuCOBOL rejects names starting with `_`. */
+export const TRY_SCRATCH_BASE = "trytmp";
+
 /**
  * Compile + run a one-off COBOL program (Docs / playground try).
- * Uses src/_try.cob so the main sample interest.cob is not overwritten.
+ * Uses src/trytmp.cob so the main sample interest.cob is not overwritten.
  */
 export function tryCobolSource(sampleDir, cobolSource, { programId = "DOCTRY" } = {}) {
   const cobc = findCobc();
@@ -29,8 +32,8 @@ export function tryCobolSource(sampleDir, cobolSource, { programId = "DOCTRY" } 
   fs.mkdirSync(srcDir, { recursive: true });
   fs.mkdirSync(binDir, { recursive: true });
 
-  const srcFile = path.join(srcDir, "_try.cob");
-  const outName = process.platform === "win32" ? "_try.exe" : "_try";
+  const srcFile = path.join(srcDir, `${TRY_SCRATCH_BASE}.cob`);
+  const outName = process.platform === "win32" ? `${TRY_SCRATCH_BASE}.exe` : TRY_SCRATCH_BASE;
   const outPath = path.join(binDir, outName);
 
   const header = `*> Docs try — temporary\n`;
